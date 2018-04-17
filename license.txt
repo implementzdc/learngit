@@ -1,3 +1,10 @@
 license of git
 
 aaaa
+
+use vi insert a line
+
+/usr/bin/bash: wq: command not found
+
+
+1234125
