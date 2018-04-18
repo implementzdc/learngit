@@ -8,7 +8,3 @@ use vi insert a line
 
 
 1234125
-
-insert!
-
-insert newdev
