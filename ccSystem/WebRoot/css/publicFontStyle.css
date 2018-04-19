@@ -1,0 +1,65 @@
+/* 标题字体样式 */
+.titleFontStyle{
+	font-weight: bold;
+	font-family: "楷体";
+	font-size: 25px;
+	color:red;
+}
+
+/* 操作文本样式  */
+.operateFontStyle,.textFontStyle .th-inner{
+	font-weight: bold;
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	color:black;
+}
+
+/* 字体加粗文本样式*/
+.textFontStyle .th-inner{
+	font-weight: bold;
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	color:black;
+}
+/* 字体正常文本样式*/
+.textFontStyle,.pagination-info,.page-list{
+	font-weight:lighter ;
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	color:black;
+}
+
+/* 表单字体文本样式*/
+.formFontStyle{
+	font-weight: lighter;
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	color:gray;
+}
+
+/* 表单字体文本样式*/
+.formFontStyle label{
+	font-weight: lighter;
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	color:black;
+}
+
+#toolbar{
+	margin-bottom: 5px;
+}
+
+#detailInfo{
+	height:70%;
+}
+
+.editInfoLabel{
+	text-align: right;
+	padding-top: 7px;
+}
+
+.checkTime{
+	width:90px;
+}
+
+

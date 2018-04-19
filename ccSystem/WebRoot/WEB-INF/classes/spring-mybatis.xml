@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd"
+       default-lazy-init="false">
+
+    <!-- 引入JDBC配置文件 -->
+    <!-- 引入方法一 -->
+    <context:property-placeholder location="classpath:jdbc-demo.properties" />
+
+    <!-- 扫描注解@Controller的类 -->
+    <!--使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入base-package为需要扫描的包（含所有子包）-->
+    <context:component-scan  base-package="com.cc" />
+
+    <!-- Spring 和 Mybatis 进行完美整合 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--     	<property name="mapperLocations" value="classpath: */*Mapper.xml" /> -->
+        <property name="mapperLocations" value="classpath:com/cc/**/*Mapper.xml" />
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 扫描basePackage下所有dao接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com." />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- 事务管理器配置, Jpa单数据源事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 数据源配置 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://10.32.1.11:3306/scm20160228?useUnicode=true&amp;characterEncoding=UTF-8&amp;emptyStringsConvertToZero=true&amp;jdbcCompliantTruncation=false&amp;noDatetimeStringSync=true&amp;nullCatalogMeansCurrent=true&amp;nullNamePatternMatchesAll=true&amp;transformedBitIsBoolean=false&amp;dontTrackOpenResources=true&amp;zeroDateTimeBehavior=convertToNull&amp;useServerPrepStmts=false&amp;autoClosePStmtStreams=true&amp;processEscapeCodesForPrepStmts=false&amp;useFastDateParsing=false&amp;populateInsertRowWithDefaultValues=false&amp;useDirectRowUnpack=false" />
+        <property name="username" value="mis" />
+        <property name="password" value="mis" />
+        <!--     	<property name="driverClassName" value="${driver}" /> -->
+        <!--     	<property name="url" value="${url}" /> -->
+        <!--     	<property name="username" value="${username}" /> -->
+        <!--     	<property name="password" value="${password}" /> -->
+        <!--         连接池最大数量   -->
+        <!--         <property name="maxActive" value="${maxActive}"></property>   -->
+        <!--         连接池最大空闲   -->
+        <!--         <property name="maxIdle" value="${maxIdle}"></property>   -->
+        <!--         连接池最小空闲   -->
+        <!--         <property name="minIdle" value="${minIdle}"></property>   -->
+        <!--         获取连接最大等待时间   -->
+        <!--         <property name="maxWait" value="${maxWait}"></property>   -->
+    </bean>
+
+</beans>
